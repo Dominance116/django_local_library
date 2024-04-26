@@ -8,7 +8,7 @@ from datetime import date
 
 class Genre(models.Model):
     #Fields
-    name = models.CharField(max_length=200, help_text='Enter a bok genre(e.g. Spiritual)')
+    name = models.CharField(max_length=200, help_text='Enter a book genre(e.g. Spiritual)')
 
     def __str__(self):
         return self.name
@@ -56,7 +56,7 @@ class BookInstance(models.Model):
     def is_overdue(self):
         if self.due_back and date.today() > self.due_back:
             return True
-        return false
+        return False
 
     class Meta:
         ordering = ['due_back']

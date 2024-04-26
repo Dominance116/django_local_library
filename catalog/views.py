@@ -4,8 +4,10 @@ from django.views import generic
 from django.contrib.auth.forms import UserCreationForm
 from .forms import CustomUserCreationForm
 from django.contrib import messages
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
+
+from rest_framework.generics import CreateAPIView
 
 # Create your views here.
 def register(request):
@@ -78,3 +80,8 @@ class LoanedBooksByUserListView(LoginRequiredMixin, generic.ListView):
 
     def get_queryset(self):
         return BookInstance.objects.filter(borrower=self.request.user).filter(status__exact='o').order_by('due_back')
+    
+
+
+class AuthorCreateView(CreateAPIView):
+    queryset=Author.objects.all()
